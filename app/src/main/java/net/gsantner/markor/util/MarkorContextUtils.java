@@ -122,6 +122,23 @@ public class MarkorContextUtils extends GsContextUtils {
         return GsFileUtils.exists(f) ? f : fallback;
     }
 
+    /**
+     * Share HTML with both the rich HTML payload and a rendered fallback.
+     * Some receiving apps ignore a text/html MIME type and only read EXTRA_TEXT.
+     */
+    @Override
+    public void shareText(final Context context, final String text, @Nullable final String mimeType) {
+        if ("text/html".equalsIgnoreCase(mimeType)) {
+            final Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType(mimeType);
+            intent.putExtra(Intent.EXTRA_TEXT, text != null ? htmlToSpanned(text) : null);
+            intent.putExtra(Intent.EXTRA_HTML_TEXT, text);
+            showChooser(context, intent, null);
+            return;
+        }
+        super.shareText(context, text, mimeType);
+    }
+
     @Override
     public void startActivity(final Context context, final Intent intent) {
         try {
