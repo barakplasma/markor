@@ -4,7 +4,7 @@
  *   License of this file: Apache 2.0
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
-#########################################################*/
+ #########################################################*/
 package net.gsantner.markor.util;
 
 import android.app.Activity;
@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.text.HtmlCompat;
 
 import net.gsantner.markor.R;
 import net.gsantner.markor.activity.openeditor.OpenEditorQuickNoteActivity;
@@ -131,7 +132,7 @@ public class MarkorContextUtils extends GsContextUtils {
         if ("text/html".equalsIgnoreCase(mimeType)) {
             final Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType(mimeType);
-            intent.putExtra(Intent.EXTRA_TEXT, text != null ? htmlToSpanned(text) : null);
+            intent.putExtra(Intent.EXTRA_TEXT, text != null ? HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY) : null);
             intent.putExtra(Intent.EXTRA_HTML_TEXT, text);
             showChooser(context, intent, null);
             return;
