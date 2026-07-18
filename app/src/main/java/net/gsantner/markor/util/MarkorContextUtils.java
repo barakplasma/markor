@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.print.PrintJob;
-import android.text.Html;
 import android.text.TextUtils;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -55,7 +54,7 @@ public class MarkorContextUtils extends GsContextUtils {
         if (file.equals(GsFileBrowserListAdapter.VIRTUAL_STORAGE_POPULAR)) {
             return R.mipmap.ic_shortcut_popular;
         } else if (file.equals(GsFileBrowserListAdapter.VIRTUAL_STORAGE_RECENTS)) {
-            return R.mipmap.ic_shortcut_recent;
+            return R.mipmap.ic_shortcut_recents;
         } else if (file.equals(GsFileBrowserListAdapter.VIRTUAL_STORAGE_FAVOURITE)) {
             return R.mipmap.ic_shortcut_favourite;
         } else if (file.isDirectory()) {
@@ -128,12 +127,11 @@ public class MarkorContextUtils extends GsContextUtils {
      * Some receiving apps ignore a text/html MIME type and only read EXTRA_TEXT.
      */
     @Override
-    @SuppressWarnings("deprecation")
     public void shareText(final Context context, final String text, @Nullable final String mimeType) {
         if ("text/html".equalsIgnoreCase(mimeType)) {
             final Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType(mimeType);
-            intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(text));
+            intent.putExtra(Intent.EXTRA_TEXT, text != null ? htmlToSpanned(text) : null);
             intent.putExtra(Intent.EXTRA_HTML_TEXT, text);
             showChooser(context, intent, null);
             return;
