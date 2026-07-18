@@ -4,7 +4,7 @@
  *   License of this file: Apache 2.0
  *     https://www.apache.org/licenses/LICENSE-2.0
  *
- #########################################################*/
+#########################################################*/
 package net.gsantner.markor.util;
 
 import android.app.Activity;
