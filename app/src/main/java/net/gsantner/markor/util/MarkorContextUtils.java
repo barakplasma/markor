@@ -54,7 +54,7 @@ public class MarkorContextUtils extends GsContextUtils {
         if (file.equals(GsFileBrowserListAdapter.VIRTUAL_STORAGE_POPULAR)) {
             return R.mipmap.ic_shortcut_popular;
         } else if (file.equals(GsFileBrowserListAdapter.VIRTUAL_STORAGE_RECENTS)) {
-            return R.mipmap.ic_shortcut_recents;
+            return R.mipmap.ic_shortcut_recent;
         } else if (file.equals(GsFileBrowserListAdapter.VIRTUAL_STORAGE_FAVOURITE)) {
             return R.mipmap.ic_shortcut_favourite;
         } else if (file.isDirectory()) {
